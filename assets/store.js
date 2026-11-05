@@ -27,7 +27,7 @@
     el.style.transitionDelay = `${(idx % 3) * 140}ms`;
     el.innerHTML = `
       ${isNew(p.created_at) ? '<span class="new">NEW</span>' : ""}
-      <div class="arch"><img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy"></div>
+      <div class="arch"><img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy"><span class="door l"></span><span class="door r"></span></div>
       <div class="no">Nº ${roman(numberOf(p))}</div>
       <h3>${esc(p.name)}</h3>
       <p>${esc(p.description)}</p>
@@ -79,9 +79,9 @@
     $("#mAddr").innerHTML = `<div class="addr">${pin.replace(/13/g, "18")}<div><b>${esc(a || "Amman, Jordan")}</b>${a ? `<br><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a + ", Amman, Jordan")}">Open in Google Maps ↗</a>` : ""}</div></div>`;
     $("#mDate").textContent = "Added " + new Date(p.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
     modal.querySelector(".sheet").scrollTop = 0;
-    modal.classList.add("open"); document.body.classList.add("locked");
+    modal.classList.add("open"); document.body.classList.add("locked"); if (window.souqLenis) window.souqLenis.stop();
   }
-  function closeScroll() { modal.classList.remove("open"); document.body.classList.remove("locked"); }
+  function closeScroll() { modal.classList.remove("open"); document.body.classList.remove("locked"); if (window.souqLenis) window.souqLenis.start(); }
   modal.querySelectorAll("[data-close]").forEach(b => b.addEventListener("click", closeScroll));
   addEventListener("keydown", e => { if (e.key === "Escape" && modal.classList.contains("open")) closeScroll(); });
 })();
