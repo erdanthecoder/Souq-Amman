@@ -50,7 +50,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .nav-r a.l:hover::after { transform: scaleX(1); }
 
 /* =================== HERO / SCENE =================== */
-.hero { position: relative; height: 340vh; background: var(--night); }
+.hero { position: relative; height: 260vh; background: var(--night); }
 .stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
 #scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; will-change: transform; }
 #dust { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
@@ -375,7 +375,7 @@ footer .small { margin-top: 22px; font-family: "Cinzel", serif; font-size: 12px;
 .pillar i { position: absolute; inset: 0; transform-origin: 50% 0; transform: scaleY(0); background: linear-gradient(#f3d58a, #c9973b); box-shadow: 0 0 12px rgba(243,213,138,.7); }
 
 /* =================== JOURNEY =================== */
-.journey { position: relative; height: 480vh; background: #0f0a1f; }
+.journey { position: relative; height: 360vh; background: #0f0a1f; }
 .j-pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
 .j-head { position: absolute; z-index: 4; top: 86px; left: 0; right: 0; text-align: center; }
 .j-track { position: absolute; inset: 0; display: flex; width: 400vw; will-change: transform; }
@@ -397,7 +397,7 @@ footer .small { margin-top: 22px; font-family: "Cinzel", serif; font-size: 12px;
 .j-line span { position: absolute; top: 50%; translate: -50% -50%; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: #1a0f08; border: 1px solid #c9973b; color: #f3d58a; font-family: "Cinzel", serif; font-size: 12px; }
 
 /* =================== GOLD WORDS =================== */
-.words { position: relative; height: 260vh; background: #140b06; }
+.words { position: relative; height: 190vh; background: #140b06; }
 .w-pin { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0 6vw; text-align: center;
   background: radial-gradient(ellipse 60% 50% at 50% 50%, #2c1a0d, #140b06 70%); }
 .w-text { font-family: "Cinzel", serif; font-weight: 900; font-size: clamp(38px, 6.4vw, 104px); line-height: 1.08; max-width: 1300px; letter-spacing: .01em; }
@@ -408,7 +408,7 @@ footer .small { margin-top: 22px; font-family: "Cinzel", serif; font-size: 12px;
 .w-ar { margin-top: 26px; font-size: clamp(30px, 4vw, 58px); color: #c9973b; opacity: 0; }
 
 /* =================== LANTERNS =================== */
-.lanterns { position: relative; height: 240vh; background: #0b0606; }
+.lanterns { position: relative; height: 190vh; background: #0b0606; }
 .l-pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
   background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255,170,60, calc(.22 * var(--lit, 0))), transparent 70%), linear-gradient(#0b0606, #1a0f08); }
 .rope { position: absolute; left: 0; right: 0; top: 70px; width: 100%; height: 200px; }

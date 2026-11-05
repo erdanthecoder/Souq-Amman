@@ -6,23 +6,6 @@
   const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
   const ease = t => 1 - Math.pow(1 - t, 3);
 
-  // ---------- smooth scrolling ----------
-  if (window.Lenis && !reduce) {
-    try {
-      const lenis = new Lenis({ lerp: .085, wheelMultiplier: .9 });
-      window.souqLenis = lenis;
-      if (document.body.classList.contains("locked")) lenis.stop();
-      (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(performance.now());
-      document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener("click", e => {
-        const id = a.getAttribute("href");
-        const el = id.length > 1 ? document.querySelector(id) : document.body;
-        if (!el) return;
-        e.preventDefault();
-        lenis.scrollTo(id === "#" ? 0 : el, { duration: 2.2 });
-      }));
-    } catch (_) { window.souqLenis = null; }
-  }
-
   // ---------- era illustrations (gold line drawings) ----------
   const L = (d, extra = "") => `<path class="ln" pathLength="1" d="${d}" ${extra}/>`;
   const F = (d, fill) => `<path class="fl" d="${d}" fill="${fill}"/>`;
