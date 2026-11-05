@@ -10,9 +10,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=1793900029">
+  <link rel="stylesheet" href="assets/style.css?v=1793900394">
 </head>
 <body class="locked">
+  <canvas id="sparks" aria-hidden="true"></canvas>
+  <div class="pillar" aria-hidden="true"><i id="pillarFill"></i></div>
 
   <nav class="nav" id="nav">
     <a href="#" class="brand" aria-label="Souq Amman">
@@ -49,37 +51,81 @@
 
       <div class="cue"><i></i>SCROLL</div>
       <div class="caption">Temple of Hercules · Amman Citadel<br>AD 162 – 166</div>
+      <div class="flash"></div>
       <div class="veil"></div>
       <div class="blackout"></div>
       <button class="skip" type="button">SKIP ›</button>
     </div>
   </header>
 
-  <!-- ===================== CHRONICLE ===================== -->
-  <section class="chron" id="chronicle">
-    <div class="wrap">
-      <div class="kick reveal">The Chronicle</div>
-      <h2 class="h2 reveal">Three thousand years of trade<span class="ar">مدينة التلال السبع</span></h2>
-      <div class="meander reveal"></div>
-      <div class="tablets" id="tablets">
-        <article class="tablet">
-          <div class="num">I</div>
-          <div class="yr">c. 1200 BC</div>
-          <h3>Rabbath Ammon</h3>
-          <p>Royal city of the Ammonites, raised on the Citadel hill above the springs.</p>
+  <!-- ===================== JOURNEY THROUGH TIME (pinned, horizontal) ===================== -->
+  <section class="journey" id="chronicle">
+    <div class="j-pin">
+      <div class="j-head"><span class="kick">The Chronicle</span></div>
+      <div class="j-track" id="jTrack">
+        <article class="era" data-era="0" style="--bg1:#2a1b45;--bg2:#0f0a1f">
+          <div class="era-num">I</div>
+          <div class="era-text">
+            <div class="era-yr">c. 1200 BC</div>
+            <h2>Rabbath Ammon</h2>
+            <div class="era-ar ar">ربّة عمّون</div>
+            <p>Royal city of the Ammonites. Round stone watchtowers guarded the hills, and caravans climbed to the Citadel to trade.</p>
+          </div>
+          <svg class="era-art" viewBox="0 0 600 420" data-art="tower"></svg>
         </article>
-        <article class="tablet">
-          <div class="num">II</div>
-          <div class="yr">3rd century BC</div>
-          <h3>Philadelphia</h3>
-          <p>Renamed by Ptolemy II, it grew into a jewel of the Roman Decapolis.</p>
+        <article class="era" data-era="1" style="--bg1:#5a2e18;--bg2:#1f0f07">
+          <div class="era-num">II</div>
+          <div class="era-text">
+            <div class="era-yr">AD 138 – 161</div>
+            <h2>Philadelphia</h2>
+            <div class="era-ar ar">فيلادلفيا</div>
+            <p>A jewel of the Roman Decapolis. Its great theatre seated six thousand beneath the Citadel hill — and still stands today.</p>
+          </div>
+          <svg class="era-art" viewBox="0 0 600 420" data-art="theatre"></svg>
         </article>
-        <article class="tablet">
-          <div class="num">III</div>
-          <div class="yr">Today</div>
-          <h3>Amman</h3>
-          <p>Capital of the Hashemite Kingdom — and home of this souq.</p>
+        <article class="era" data-era="2" style="--bg1:#17463c;--bg2:#06171a">
+          <div class="era-num">III</div>
+          <div class="era-text">
+            <div class="era-yr">8th century AD</div>
+            <h2>The Umayyads</h2>
+            <div class="era-ar ar">الأمويون</div>
+            <p>A palace with a great dome rose on the Citadel, beside a vast round cistern that held the city’s water.</p>
+          </div>
+          <svg class="era-art" viewBox="0 0 600 420" data-art="palace"></svg>
         </article>
+        <article class="era" data-era="3" style="--bg1:#121a3d;--bg2:#04050f">
+          <div class="era-num">IV</div>
+          <div class="era-text">
+            <div class="era-yr">Today</div>
+            <h2>Amman</h2>
+            <div class="era-ar ar">عمّان</div>
+            <p>Capital of the Hashemite Kingdom — a city of seven hills and a million lights. And home of this souq.</p>
+          </div>
+          <svg class="era-art" viewBox="0 0 600 420" data-art="city"></svg>
+        </article>
+      </div>
+      <div class="j-line"><i id="jFill"></i>
+        <span style="left:0%">I</span><span style="left:33.33%">II</span><span style="left:66.66%">III</span><span style="left:100%">IV</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== GOLD WORDS ===================== -->
+  <section class="words" id="words">
+    <div class="w-pin">
+      <p class="w-text" id="wText">From the Citadel of kings to the palm of your hand.</p>
+      <div class="w-ar ar" id="wAr">من القلعة إلى يديك</div>
+    </div>
+  </section>
+
+  <!-- ===================== LANTERNS ===================== -->
+  <section class="lanterns" id="lanterns">
+    <div class="l-pin">
+      <svg class="rope" viewBox="0 0 1600 200" preserveAspectRatio="none" aria-hidden="true"><path d="M-20 20 Q800 150 1620 20" fill="none" stroke="#6b4a2a" stroke-width="3"/></svg>
+      <div class="l-row" id="lRow"></div>
+      <div class="l-copy" id="lCopy">
+        <div class="kick">At dusk</div>
+        <h2 class="h2">The Souq Awakens<span class="ar">يستيقظ السوق</span></h2>
       </div>
     </div>
   </section>
@@ -144,10 +190,12 @@
     </div>
   </div>
 
-  <script src="assets/config.js?v=1793900029"></script>
-  <script src="assets/api.js?v=1793900029"></script>
-  <script src="assets/effects.js?v=1793900029"></script>
-  <script src="assets/scene.js?v=1793900029"></script>
-  <script src="assets/store.js?v=1793900029"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="assets/config.js?v=1793900394"></script>
+  <script src="assets/api.js?v=1793900394"></script>
+  <script src="assets/effects.js?v=1793900394"></script>
+  <script src="assets/scene.js?v=1793900394"></script>
+  <script src="assets/journey.js?v=1793900394"></script>
+  <script src="assets/store.js?v=1793900394"></script>
 </body>
 </html>
