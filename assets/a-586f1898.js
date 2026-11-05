@@ -32,7 +32,7 @@
       const ok = await SouqAPI.checkPassword(pw);
       if (ok === true) { toast("Unlocked ✓", "ok"); unlock(pw); }
       else {
-        const card = $("#gate"); card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake");
+        const card = $("#gate"); card.classList.remove("bad"); void card.offsetWidth; card.classList.add("bad");
         toast("Wrong password. Please try again.", "err");
       }
     } catch (err) { toast("Connection error: " + err.message, "err"); }
