@@ -24,7 +24,7 @@
       o += L("M222 352 Q300 372 379 352");
       for (let y = 172; y < 346; y += 22) o += L(`M224 ${y} Q300 ${y + 13} 377 ${y}`, 'opacity=".55"');
       o += L("M286 356 L286 302 Q300 284 314 302 L314 356");
-      o += L("M480 60 A30 30 0 1 0 480 120 A22 22 0 1 1 480 60");
+      o += L("M450 90 a30 30 0 1 0 60 0 a30 30 0 1 0 -60 0");
       for (let i = 0; i < 9; i++) { const x = 40 + rnd() * 520, y = 20 + rnd() * 110; o += L(`M${x - 4} ${y} H${x + 4} M${x} ${y - 4} V${y + 4}`, 'opacity=".7"'); }
       o += L("M60 345 l10 -24 l8 24 M90 344 l12 -30 l10 30", 'opacity=".6"');
       return o;
@@ -51,7 +51,6 @@
       o += L("M160 352 V232 H440 V352");
       o += L("M220 232 V214 H380 V232");
       o += L("M232 214 Q300 102 368 214");
-      o += L("M300 132 V112 M294 118 H306");
       o += L("M276 352 V284 Q300 252 324 284 V352");
       for (const x of [186, 380]) o += L(`M${x} 330 V290 Q${x + 17} 270 ${x + 34} 290 V330`, 'opacity=".7"');
       o += L("M160 252 H440", 'opacity=".5"');
@@ -59,7 +58,7 @@
       o += L("M482 352 A50 10 0 0 0 582 352", 'opacity=".5"');
       o += L("M92 352 Q104 282 88 214");
       o += L("M88 214 Q60 200 36 220 M88 214 Q70 186 44 182 M88 214 Q96 182 122 176 M88 214 Q118 202 140 222 M88 214 Q90 196 82 168");
-      o += L("M520 60 A22 22 0 1 0 520 104 A16 16 0 1 1 520 60");
+      o += L("M498 82 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0");
       return o;
     },
     city() {
@@ -82,7 +81,7 @@
       for (let y = 124; y < 296; y += 14) o += L(`M446 ${y} H470`, 'opacity=".35"');
       o += L("M120 330 V80");
       o += `<path class="flagw" d="M122 82 h70 v42 h-70z" fill="url(#jflag)"/>`;
-      o += L("M540 50 A24 24 0 1 0 540 98 A18 18 0 1 1 540 50");
+      o += L("M516 74 a24 24 0 1 0 48 0 a24 24 0 1 0 -48 0");
       for (let i = 0; i < 12; i++) { const x = rnd() * 600, y = rnd() * 90; o += `<circle class="win" style="--t:${(rnd() * 3).toFixed(2)}s" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="1.3" fill="#fff"/>`; }
       return `<defs><linearGradient id="jflag" x1="0" y1="0" x2="0" y2="1"><stop offset=".333" stop-color="#111"/><stop offset=".333" stop-color="#f4f4f4"/><stop offset=".666" stop-color="#f4f4f4"/><stop offset=".666" stop-color="#007a3d"/></linearGradient></defs>` + o + `<path class="flagw" d="M122 82 L150 103 L122 124Z" fill="#ce1126"/>`;
     }
