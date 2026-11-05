@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Souq Amman</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#1a0f08">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a0f08'/%3E%3Cg fill='%23f3d58a'%3E%3Crect x='14' y='12' width='36' height='6'/%3E%3Crect x='18' y='18' width='8' height='32'/%3E%3Crect x='38' y='18' width='8' height='32'/%3E%3Crect x='12' y='50' width='40' height='5'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="ready">
+  <nav class="nav solid" id="nav">
+    <a href="index.html" class="brand">
+      <svg viewBox="0 0 22 30" fill="currentColor" aria-hidden="true"><rect x="0" y="0" width="22" height="4"/><rect x="2" y="4" width="18" height="2"/><rect x="5" y="6" width="12" height="20" opacity=".9"/><rect x="1" y="26" width="20" height="4"/></svg>
+      <span>SOUQ AMMAN</span>
+    </a>
+    <div class="nav-r"><a class="l" href="index.html">View store</a></div>
+  </nav>
+
+  <main class="admin">
+    <div class="gate" id="gate">
+      <svg viewBox="0 0 24 80" fill="currentColor" aria-hidden="true"><rect width="24" height="6"/><rect x="5" y="6" width="14" height="66"/><rect x="1" y="72" width="22" height="8"/></svg>
+      <h1>The Vault</h1>
+      <p>Speak the word to enter.</p>
+      <form id="loginForm" class="form" autocomplete="off">
+        <div class="affix">
+          <input id="pw" class="input" type="password" placeholder="Password" required autocomplete="current-password" aria-label="Password">
+          <button type="button" id="pwToggle">Show</button>
+        </div>
+        <button class="stone btn-full" type="submit"><span class="spinner"></span><span>Unlock</span></button>
+      </form>
+    </div>
+
+    <section class="dash" id="dash">
+      <div class="dash-head">
+        <div>
+          <div class="pv-label" style="margin:0 0 6px">The Vault</div>
+          <h1>Add a treasure</h1>
+        </div>
+        <button class="ghost" id="logout" type="button">Lock</button>
+      </div>
+
+      <div class="dash-grid">
+        <div class="panel">
+          <form id="productForm" class="form">
+            <div class="field">
+              <label>Picture <em>required</em></label>
+              <div class="drop" id="drop">
+                <input type="file" id="file" accept="image/*" aria-label="Product picture">
+                <div class="hint" id="dropHint"><div style="font-size:30px">📜</div><b>Click or drop a photo</b><small>JPG, PNG or WEBP — resized automatically</small></div>
+              </div>
+            </div>
+            <div class="field">
+              <label for="name">Name <em>required</em></label>
+              <input id="name" class="input" maxlength="120" required placeholder="e.g. Hand-painted Jordanian vase">
+            </div>
+            <div class="field">
+              <label for="desc">Description <em>required</em></label>
+              <textarea id="desc" class="textarea" maxlength="3000" required placeholder="Condition, size, colour, how to contact you…"></textarea>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="price">Price <em>required</em></label>
+                <div class="affix">
+                  <input id="price" class="input" type="number" min="0" step="0.001" required placeholder="0.00" inputmode="decimal">
+                  <span>JOD</span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="addr">Address <em>optional</em></label>
+                <input id="addr" class="input" maxlength="300" placeholder="e.g. Rainbow St, Jabal Amman">
+              </div>
+            </div>
+            <button class="stone btn-full" type="submit" id="publish"><span class="spinner"></span><span>Publish treasure</span></button>
+          </form>
+        </div>
+
+        <div>
+          <div class="pv-label">Live preview</div>
+          <article class="art static">
+            <div class="arch"><img id="pvImg" alt="" style="display:none"><div id="pvPh" style="position:absolute;inset:0;display:grid;place-items:center;font-size:44px;opacity:.4">🏛️</div></div>
+            <div class="no">Nº I</div>
+            <h3 id="pvName">Treasure name</h3>
+            <p id="pvDesc">Your description will appear here.</p>
+            <div class="plaque" id="pvPrice">0 JOD</div>
+            <div class="loc">📍 <span id="pvAddr">Amman, Jordan</span></div>
+          </article>
+
+          <div class="panel" style="margin-top:26px">
+            <h2>Your treasures <span id="myCount" style="color:var(--ink-3)"></span></h2>
+            <div class="my-list" id="myList"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/config.js"></script>
+  <script src="assets/api.js"></script>
+  <script src="assets/effects.js"></script>
+  <script src="assets/a-586f1898.js"></script>
+</body>
+</html>

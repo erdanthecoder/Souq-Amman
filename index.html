@@ -3,178 +3,151 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Souq Amman — Marketplace</title>
-  <meta name="description" content="Souq Amman: buy unique products from local sellers in Amman, Jordan.">
-  <meta name="theme-color" content="#0b0a10">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23e9b45c'/%3E%3Ctext x='32' y='45' font-size='36' text-anchor='middle' font-family='Georgia' font-weight='bold' fill='%23241705'%3ES%3C/text%3E%3C/svg%3E">
+  <title>Souq Amman</title>
+  <meta name="description" content="Souq Amman — treasures from the ancient city of Amman, Jordan.">
+  <meta name="theme-color" content="#1a0f08">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a0f08'/%3E%3Cg fill='%23f3d58a'%3E%3Crect x='14' y='12' width='36' height='6'/%3E%3Crect x='18' y='18' width='8' height='32'/%3E%3Crect x='38' y='18' width='8' height='32'/%3E%3Crect x='12' y='50' width='40' height='5'/%3E%3C/g%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body class="locked">
-  <canvas id="stars"></canvas>
-  <div class="aurora"></div>
-  <div class="cursor-glow"></div>
 
-  <!-- ===== Animated intro ===== -->
-  <div id="intro" aria-hidden="true">
-    <div class="intro-inner">
-      <svg class="intro-skyline" viewBox="0 0 680 190" aria-hidden="true">
-        <circle class="sun" cx="430" cy="78" r="34"/>
-        <!-- hills -->
-        <path d="M0 170 Q60 130 120 150 T240 140 T360 150 T480 135 T600 150 T680 140"/>
-        <!-- citadel columns -->
-        <path d="M70 150 V70 M82 150 V70 M94 150 V70 M106 150 V70 M62 70 H114 M62 64 H114 M66 58 H110"/>
-        <!-- houses -->
-        <path d="M130 150 V112 H170 V150 M170 150 V98 H205 V150 M138 122 h8 M154 122 h8 M178 110 h8 M192 110 h6 M205 150 V120 H240 V150"/>
-        <!-- mosque dome + minaret -->
-        <path d="M262 150 V112 H340 V150 M268 112 Q301 62 334 112 M301 79 V70 M304 58 A5 5 0 1 0 304 67 A4 4 0 1 1 304 58"/>
-        <path d="M356 150 V58 M372 150 V58 M354 58 H374 M358 58 L364 34 L370 58 M352 92 H376"/>
-        <!-- modern towers -->
-        <path d="M500 150 V60 L520 48 V150 M528 150 V40 H552 V150 M560 150 V76 H585 V150 M508 75 h6 M508 92 h6 M536 56 h8 M536 76 h8 M536 96 h8"/>
-        <!-- flag pole -->
-        <path d="M620 150 V36 M620 38 H650 V56 H620"/>
-        <path d="M0 176 H680"/>
-      </svg>
-      <div class="intro-word serif" id="introWord"></div>
-      <div class="intro-sub">Marketplace · Amman · Jordan</div>
-      <div class="intro-arabic">سوق عمّان</div>
-      <div class="intro-bar"><i></i></div>
-    </div>
-    <button class="intro-skip" id="skipIntro" type="button">Skip →</button>
-  </div>
-
-  <!-- ===== Navigation ===== -->
-  <nav class="nav">
-    <a href="#" class="logo"><span class="logo-mark">S</span> Souq Amman</a>
-    <div class="nav-links">
-      <a href="#products" class="hide-sm">Products</a>
-      <a href="#why" class="hide-sm">Why us</a>
-      <a href="sell.html" class="btn btn-gold btn-sm">Sell an item</a>
+  <nav class="nav" id="nav">
+    <a href="#" class="brand" aria-label="Souq Amman">
+      <svg viewBox="0 0 22 30" fill="currentColor" aria-hidden="true"><rect x="0" y="0" width="22" height="4"/><rect x="2" y="4" width="18" height="2"/><rect x="5" y="6" width="12" height="20" opacity=".9"/><rect x="1" y="26" width="20" height="4"/></svg>
+      <span>SOUQ AMMAN</span>
+    </a>
+    <div class="nav-r">
+      <a class="l hide" href="#chronicle">The City</a>
+      <a class="l" href="#collection">The Collection</a>
     </div>
   </nav>
 
-  <!-- ===== Hero ===== -->
-  <header class="hero">
-    <div class="hero-grid">
-      <div>
-        <span class="eyebrow fade-in"><span class="dot"></span> Live in Amman, Jordan <span class="flag"></span></span>
-        <h1 class="serif">
-          <span class="line"><span>Discover</span></span>
-          <span class="line"><span class="shine">treasures</span></span>
-          <span class="line"><span>from Amman.</span></span>
+  <!-- ===================== CITADEL (opening + hero) ===================== -->
+  <header class="hero" id="top">
+    <div class="stage">
+      <svg id="scene" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
+      <canvas id="dust" aria-hidden="true"></canvas>
+      <div class="vignette"></div>
+      <div class="shade"></div>
+
+      <div class="hero-copy">
+        <div class="est">EST · MMXXVI</div>
+        <h1 class="title" aria-label="Souq Amman">
+          <span class="ln" data-word="SOUQ"></span>
+          <span class="ln" data-word="AMMAN"></span>
         </h1>
-        <p class="lead fade-in d1">A curated marketplace where local sellers across the seven hills share their finest finds — from handmade crafts to everyday essentials.</p>
-        <div class="hero-ctas fade-in d2">
-          <a href="#products" class="btn btn-gold">Browse products →</a>
-          <a href="sell.html" class="btn btn-ghost">Become a seller</a>
-        </div>
-        <div class="hero-stats fade-in d3">
-          <div><b id="statCount">0</b><span>Products listed</span></div>
-          <div><b>7</b><span>Hills of Amman</span></div>
-          <div><b>JOD</b><span>Local prices</span></div>
+        <div class="hero-ar ar">سوق عمّان</div>
+        <p class="hero-lead">Treasures from the city of seven hills — where Ammonites, Greeks and Romans once traded beneath the Citadel.</p>
+        <div class="hero-cta">
+          <a href="#collection" class="stone">Enter the Collection <span class="arr">→</span></a>
+          <a href="#chronicle" class="ghost">The City</a>
         </div>
       </div>
-      <div class="hero-visual fade-in d2" id="heroVisual">
-        <div class="orbit-ring"></div>
-        <div class="orbit-ring r2"></div>
-        <div class="hero-core"><div><b>سوق<br>عمّان</b><small>Est. 2026</small></div></div>
-        <div class="float-card c1"><div class="ph">🏺</div><div class="meta"><span>Handmade</span><b>Crafts</b></div></div>
-        <div class="float-card c2"><div class="ph">👜</div><div class="meta"><span>Fashion</span><b>Style</b></div></div>
-        <div class="float-card c3"><div class="ph">📱</div><div class="meta"><span>Electronics</span><b>Tech</b></div></div>
-      </div>
+
+      <div class="cue"><i></i>SCROLL</div>
+      <div class="caption">Temple of Hercules · Amman Citadel<br>AD 162 – 166</div>
+      <div class="veil"></div>
+      <div class="blackout"></div>
+      <button class="skip" type="button">SKIP ›</button>
     </div>
-    <a href="#products" class="scroll-hint"><i></i>Scroll</a>
   </header>
 
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track" id="marquee"></div>
-  </div>
-
-  <!-- ===== Products ===== -->
-  <section class="section" id="products">
+  <!-- ===================== CHRONICLE ===================== -->
+  <section class="chron" id="chronicle">
     <div class="wrap">
-      <div class="section-head reveal">
-        <div>
-          <span class="kicker">The collection</span>
-          <h2 class="serif">Fresh on the souq</h2>
-        </div>
-        <p>Every item is listed by a seller in Amman. Tap any product to see the full details, price and pickup location.</p>
+      <div class="kick reveal">The Chronicle</div>
+      <h2 class="h2 reveal">Three thousand years of trade<span class="ar">مدينة التلال السبع</span></h2>
+      <div class="meander reveal"></div>
+      <div class="tablets" id="tablets">
+        <article class="tablet">
+          <div class="num">I</div>
+          <div class="yr">c. 1200 BC</div>
+          <h3>Rabbath Ammon</h3>
+          <p>Royal city of the Ammonites, raised on the Citadel hill above the springs.</p>
+        </article>
+        <article class="tablet">
+          <div class="num">II</div>
+          <div class="yr">3rd century BC</div>
+          <h3>Philadelphia</h3>
+          <p>Renamed by Ptolemy II, it grew into a jewel of the Roman Decapolis.</p>
+        </article>
+        <article class="tablet">
+          <div class="num">III</div>
+          <div class="yr">Today</div>
+          <h3>Amman</h3>
+          <p>Capital of the Hashemite Kingdom — and home of this souq.</p>
+        </article>
       </div>
-      <div class="toolbar reveal">
+    </div>
+  </section>
+
+  <!-- ===================== COLLECTION ===================== -->
+  <section class="coll" id="collection">
+    <div class="wrap">
+      <div class="kick reveal">The Collection</div>
+      <h2 class="h2 reveal">Treasures of the Souq<span class="ar">كنوز السوق</span></h2>
+      <div class="meander reveal"></div>
+      <p class="lede reveal">Every piece is shown with its full story and price in Jordanian dinars. Choose one to unroll its scroll.</p>
+
+      <div class="tools reveal">
         <label class="search">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-          <input id="q" type="search" placeholder="Search products, descriptions, areas…" aria-label="Search products">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="q" type="search" placeholder="Search the collection…" aria-label="Search the collection">
         </label>
-        <select id="sort" class="select" aria-label="Sort products">
-          <option value="new">Newest first</option>
-          <option value="low">Price: low to high</option>
-          <option value="high">Price: high to low</option>
-          <option value="az">Name: A–Z</option>
-        </select>
-      </div>
-      <div class="grid" id="grid">
-        <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Why ===== -->
-  <section class="section" id="why">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div>
-          <span class="kicker">Why Souq Amman</span>
-          <h2 class="serif">Local. Simple. Trusted.</h2>
+        <div class="sorts" id="sorts">
+          <button class="on" data-sort="new" type="button">Newest</button>
+          <button data-sort="low" type="button">Price ↑</button>
+          <button data-sort="high" type="button">Price ↓</button>
         </div>
       </div>
-      <div class="features">
-        <div class="feature reveal"><div class="ic">📍</div><h4>Right here in Amman</h4><p>From Jabal Amman to Abdoun and Sweifieh — find items close to you with pickup locations on the map.</p></div>
-        <div class="feature reveal"><div class="ic">💎</div><h4>Curated sellers</h4><p>Only verified sellers with access can list products, so the collection stays clean and genuine.</p></div>
-        <div class="feature reveal"><div class="ic">⚡</div><h4>Instant listings</h4><p>Sellers add a photo, name, description and price — and it's live for everyone within seconds.</p></div>
-      </div>
-    </div>
-  </section>
 
-  <section class="section">
-    <div class="wrap">
-      <div class="cta reveal">
-        <span class="kicker">For sellers</span>
-        <h2 class="serif">Have something to sell?</h2>
-        <p>Open the seller studio, enter your access password and publish your product to all of Amman.</p>
-        <a href="sell.html" class="btn btn-gold">Open seller studio →</a>
+      <div class="grid" id="grid">
+        <div class="ghostcard"></div><div class="ghostcard"></div><div class="ghostcard"></div>
       </div>
     </div>
   </section>
 
   <footer>
-    <div class="wrap">
-      <div class="logo"><span class="logo-mark">S</span> Souq Amman</div>
-      <div>© <span id="year"></span> Souq Amman · Amman, Jordan <span class="flag"></span></div>
+    <div class="row-cols" aria-hidden="true">
+      <svg viewBox="0 0 24 80" fill="currentColor"><rect width="24" height="6"/><rect x="5" y="6" width="14" height="66"/><rect x="1" y="72" width="22" height="8"/></svg>
+      <svg viewBox="0 0 24 80" fill="currentColor"><rect width="24" height="6"/><rect x="5" y="6" width="14" height="66"/><rect x="1" y="72" width="22" height="8"/></svg>
+      <svg viewBox="0 0 24 80" fill="currentColor"><rect width="24" height="6"/><rect x="5" y="6" width="14" height="66"/><rect x="1" y="72" width="22" height="8"/></svg>
+      <svg viewBox="0 0 24 80" fill="currentColor"><rect width="24" height="6"/><rect x="5" y="6" width="14" height="66"/><rect x="1" y="72" width="22" height="8"/></svg>
+      <svg viewBox="0 0 24 80" fill="currentColor"><rect width="24" height="6"/><rect x="5" y="6" width="14" height="66"/><rect x="1" y="72" width="22" height="8"/></svg>
     </div>
+    <div class="fb">SOUQ AMMAN</div>
+    <div class="far ar">سوق عمّان</div>
+    <div class="small">AMMAN · HASHEMITE KINGDOM OF JORDAN <span class="flag"></span> · MMXXVI</div>
   </footer>
 
-  <!-- ===== Product modal ===== -->
+  <!-- ===================== SCROLL MODAL ===================== -->
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
     <div class="modal-bg" data-close></div>
-    <div class="modal-box">
-      <button class="close" data-close aria-label="Close">✕</button>
-      <div class="modal-img"><img id="mImg" alt=""></div>
-      <div class="modal-info">
-        <span class="kicker" style="margin:0">Souq Amman</span>
-        <h3 class="serif" id="mTitle"></h3>
-        <div class="price" id="mPrice"></div>
-        <div class="desc" id="mDesc"></div>
-        <div id="mAddr"></div>
-        <div class="date" id="mDate"></div>
+    <div class="scroll">
+      <div class="rod"></div>
+      <div class="sheet">
+        <button class="x" data-close aria-label="Close">✕</button>
+        <div class="arch"><img id="mImg" alt=""></div>
+        <div class="info">
+          <div class="no" id="mNo"></div>
+          <h3 id="mTitle"></h3>
+          <div class="plaque" id="mPrice"></div>
+          <div class="desc" id="mDesc"></div>
+          <div id="mAddr"></div>
+          <div class="date" id="mDate"></div>
+        </div>
       </div>
+      <div class="rod"></div>
     </div>
   </div>
 
   <script src="assets/config.js"></script>
   <script src="assets/api.js"></script>
   <script src="assets/effects.js"></script>
+  <script src="assets/scene.js"></script>
   <script src="assets/store.js"></script>
 </body>
 </html>

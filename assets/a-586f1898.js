@@ -1,7 +1,7 @@
 (function () {
   const { escape: esc, formatPrice } = window.SouqAPI;
   const $ = s => document.querySelector(s);
-  const KEY = "souq_seller_pw";
+  const KEY = "souq_admin_pw";
   let password = null;
   let imageData = null;
 
@@ -30,9 +30,9 @@
     setLoading(btn, true);
     try {
       const ok = await SouqAPI.checkPassword(pw);
-      if (ok === true) { toast("Welcome to the studio ✦", "ok"); unlock(pw); }
+      if (ok === true) { toast("Unlocked ✓", "ok"); unlock(pw); }
       else {
-        const card = $("#gate"); card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake");
+        const card = $("#gate"); card.classList.remove("bad"); void card.offsetWidth; card.classList.add("bad");
         toast("Wrong password. Please try again.", "err");
       }
     } catch (err) { toast("Connection error: " + err.message, "err"); }
@@ -98,7 +98,7 @@
     $("#pvName").textContent = $("#name").value || "Product name";
     $("#pvDesc").textContent = $("#desc").value || "Your description will appear here.";
     $("#pvPrice").textContent = formatPrice($("#price").value || 0);
-    $("#pvAddr").textContent = "📍 " + ($("#addr").value || "Amman, Jordan");
+    $("#pvAddr").textContent = $("#addr").value || "Amman, Jordan";
   }
   ["name", "desc", "price", "addr"].forEach(id => $("#" + id).addEventListener("input", updatePreview));
 
@@ -127,7 +127,7 @@
       updatePreview();
       loadMine();
     } catch (err) {
-      if (/password/i.test(err.message)) { toast("Session expired — please unlock again", "err"); $("#logout").click(); }
+      if (/password/i.test(err.message)) { toast("Wrong password — please unlock again", "err"); $("#logout").click(); }
       else toast("Could not publish: " + err.message, "err");
     } finally { setLoading(btn, false); }
   });
