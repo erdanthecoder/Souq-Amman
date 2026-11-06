@@ -11,6 +11,7 @@
   // ---------- Collection ----------
   let products = [];
   let sort = "new";
+  let cat = "All";
   const grid = $("#grid");
   const pin = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>';
   const isNew = d => Date.now() - new Date(d).getTime() < 4 * 864e5;
@@ -27,8 +28,8 @@
     el.style.transitionDelay = `${(idx % 3) * 140}ms`;
     el.innerHTML = `
       ${isNew(p.created_at) ? '<span class="new">NEW</span>' : ""}
-      <div class="arch"><img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy"><span class="door l"></span><span class="door r"></span></div>
-      <div class="no">Nº ${roman(numberOf(p))}</div>
+      <div class="arch"><img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy"></div>
+      <div class="no">Nº ${roman(numberOf(p))} · ${esc(p.category || "Other")}</div>
       <h3>${esc(p.name)}</h3>
       <p>${esc(p.description)}</p>
       <div class="plaque">${esc(formatPrice(p.price))}</div>
@@ -43,7 +44,7 @@
 
   function render() {
     const q = $("#q").value.trim().toLowerCase();
-    let list = products.filter(p => !q || [p.name, p.description, p.address].some(v => (v || "").toLowerCase().includes(q)));
+    let list = products.filter(p => (cat === "All" || (p.category || "Other") === cat) && (!q || [p.name, p.description, p.address, p.category].some(v => (v || "").toLowerCase().includes(q))));
     if (sort === "low") list.sort((a, b) => a.price - b.price);
     else if (sort === "high") list.sort((a, b) => b.price - a.price);
     else list.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
@@ -63,7 +64,19 @@
   }));
   $("#q").addEventListener("input", render);
 
-  SouqAPI.listProducts().then(d => { products = d || []; render(); }).catch(err => {
+  // ---------- categories ----------
+  function renderCats() {
+    const counts = {};
+    products.forEach(p => { const c = p.category || "Other"; counts[c] = (counts[c] || 0) + 1; });
+    const list = ["All", ...SouqAPI.categories.filter(c => counts[c])];
+    $("#cats").innerHTML = list.map(c => `<button type="button" class="${c === cat ? "on" : ""}" data-cat="${esc(c)}">${esc(c)}<b>${c === "All" ? products.length : counts[c]}</b></button>`).join("");
+  }
+  $("#cats").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    cat = b.dataset.cat; renderCats(); render();
+  });
+
+  SouqAPI.listProducts().then(d => { products = d || []; renderCats(); render(); }).catch(err => {
     grid.innerHTML = `<div class="empty">${column}<h3>The souq could not be reached</h3><p>${esc(err.message)}. Please refresh.</p></div>`;
   });
 
@@ -71,7 +84,7 @@
   const modal = $("#modal");
   function openScroll(p) {
     $("#mImg").src = p.image; $("#mImg").alt = p.name;
-    $("#mNo").textContent = "Nº " + roman(numberOf(p));
+    $("#mNo").textContent = "Nº " + roman(numberOf(p)) + " · " + (p.category || "Other");
     $("#mTitle").textContent = p.name;
     $("#mPrice").textContent = formatPrice(p.price);
     $("#mDesc").textContent = p.description;
@@ -79,9 +92,9 @@
     $("#mAddr").innerHTML = `<div class="addr">${pin.replace(/13/g, "18")}<div><b>${esc(a || "Amman, Jordan")}</b>${a ? `<br><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a + ", Amman, Jordan")}">Open in Google Maps ↗</a>` : ""}</div></div>`;
     $("#mDate").textContent = "Added " + new Date(p.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
     modal.querySelector(".sheet").scrollTop = 0;
-    modal.classList.add("open"); document.body.classList.add("locked"); if (window.souqLenis) window.souqLenis.stop();
+    modal.classList.add("open"); document.body.classList.add("locked");
   }
-  function closeScroll() { modal.classList.remove("open"); document.body.classList.remove("locked"); if (window.souqLenis) window.souqLenis.start(); }
+  function closeScroll() { modal.classList.remove("open"); document.body.classList.remove("locked"); }
   modal.querySelectorAll("[data-close]").forEach(b => b.addEventListener("click", closeScroll));
   addEventListener("keydown", e => { if (e.key === "Escape" && modal.classList.contains("open")) closeScroll(); });
 })();

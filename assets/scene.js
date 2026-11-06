@@ -256,12 +256,11 @@
   const layers = [...svg.querySelectorAll(".layer")].map(g => ({ g, d: +g.dataset.depth }));
   const copy = document.querySelector(".hero-copy"), cue = document.querySelector(".cue"), veil = document.querySelector(".veil");
   const hero = document.querySelector(".hero");
-  let mx = 0, my = 0, tmx = 0, tmy = 0, origin = null, letters = null;
-  const flash = document.querySelector(".flash");
+  let mx = 0, my = 0, tmx = 0, tmy = 0, origin = null;
   addEventListener("pointermove", e => { tmx = e.clientX / innerWidth - .5; tmy = e.clientY / innerHeight - .5; });
   function computeOrigin() {
     const m = svg.getScreenCTM(); if (!m) return;
-    const pt = svg.createSVGPoint(); pt.x = 1080; pt.y = 330;
+    const pt = svg.createSVGPoint(); pt.x = SUNX - 40; pt.y = 300;
     const s = pt.matrixTransform(m), b = stage.getBoundingClientRect();
     origin = `${f(s.x - b.left)}px ${f(s.y - b.top)}px`;
   }
@@ -276,15 +275,11 @@
     if (scrollY < hero.offsetHeight + 50) {
       for (const L of layers) L.g.style.transform = `translate(${f(-mx * L.d * 40)}px, ${f(-my * L.d * 16 + p * L.d * 120)}px)`;
       svg.style.transformOrigin = origin;
-      svg.style.transform = `scale(${f(1 + Math.pow(p, 2.3) * 7 * 100) / 100})`;
-      // title letters scatter like falling stones
-      if (!letters) letters = [...document.querySelectorAll(".title .lt")].map(el => ({ el, x: (Math.random() - .5) * 900, y: -200 - Math.random() * 500, r: (Math.random() - .5) * 140 }));
-      const q = Math.min(1, p * 2.2), e = q * q;
-      for (const L of letters) { L.el.style.translate = `${f(L.x * e)}px ${f(L.y * e)}px`; L.el.style.rotate = `${f(L.r * e)}deg`; }
-      copy.style.opacity = Math.max(0, 1 - p * 2.4);
+      svg.style.transform = `scale(${1 + p * p * 1.6})`;
+      copy.style.opacity = Math.max(0, 1 - p * 2.6);
+      copy.style.translate = `0 ${f(-p * 160)}px`;
       cue.style.opacity = body.classList.contains("lit") ? Math.max(0, .85 - p * 5) : "";
-      flash.style.opacity = Math.max(0, Math.min(1, (p - .62) / .3));
-      veil.style.opacity = Math.max(0, (p - .88) / .12);
+      veil.style.opacity = Math.max(0, (p - .55) / .45);
       drawFlag(t);
       // dust
       ctx.clearRect(0, 0, cv.width, cv.height);
@@ -307,7 +302,6 @@
   function ready() {
     if (readyDone) return; readyDone = true;
     body.classList.add("ready"); body.classList.remove("locked");
-    if (window.souqLenis) window.souqLenis.start();
     computeOrigin();
     document.dispatchEvent(new Event("souq:ready"));
   }

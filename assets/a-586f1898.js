@@ -94,13 +94,15 @@
   drop.addEventListener("drop", e => { e.preventDefault(); takeFile(e.dataTransfer.files[0]); });
 
   // ---------- Live preview ----------
+  $("#cat").innerHTML = SouqAPI.categories.map(c => `<option>${esc(c)}</option>`).join("");
   function updatePreview() {
+    $("#pvCat").textContent = "Nº I · " + $("#cat").value;
     $("#pvName").textContent = $("#name").value || "Product name";
     $("#pvDesc").textContent = $("#desc").value || "Your description will appear here.";
     $("#pvPrice").textContent = formatPrice($("#price").value || 0);
     $("#pvAddr").textContent = $("#addr").value || "Amman, Jordan";
   }
-  ["name", "desc", "price", "addr"].forEach(id => $("#" + id).addEventListener("input", updatePreview));
+  ["name", "desc", "price", "addr", "cat"].forEach(id => { $("#" + id).addEventListener("input", updatePreview); $("#" + id).addEventListener("change", updatePreview); });
 
   // ---------- Publish ----------
   $("#productForm").addEventListener("submit", async e => {
@@ -116,6 +118,7 @@
         description: $("#desc").value.trim(),
         price,
         address: $("#addr").value.trim(),
+        category: $("#cat").value,
         image: imageData
       });
       confetti();
@@ -143,7 +146,7 @@
       list.innerHTML = items.map(p => `
         <div class="my-item">
           <img src="${esc(p.image)}" alt="">
-          <div class="t"><b>${esc(p.name)}</b><span>${esc(formatPrice(p.price))}</span></div>
+          <div class="t"><b>${esc(p.name)}</b><span>${esc(formatPrice(p.price))} · ${esc(p.category || "Other")}</span></div>
           <button class="del" data-id="${esc(p.id)}" type="button">Delete</button>
         </div>`).join("");
     } catch (err) { list.innerHTML = `<p style="color:#ff9c99">Could not load: ${esc(err.message)}</p>`; }

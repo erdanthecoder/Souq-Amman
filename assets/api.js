@@ -25,6 +25,7 @@
   }
 
   window.SouqAPI = {
+    categories: ["Fashion", "Jewellery & Accessories", "Electronics", "Home & Décor", "Furniture", "Beauty", "Books", "Sports", "Kids & Toys", "Other"],
     async listProducts() {
       const res = await fetch(
         C.url + "/rest/v1/amman_products?select=*&order=created_at.desc",
@@ -42,7 +43,8 @@
         p_description: p.description,
         p_price: p.price,
         p_address: p.address || null,
-        p_image: p.image
+        p_image: p.image,
+        p_category: p.category || "Other"
       });
     },
     deleteProduct(password, id) {

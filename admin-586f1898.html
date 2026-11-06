@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=1793900733">
+  <link rel="stylesheet" href="assets/style.css?v=1793939382">
 </head>
 <body class="ready">
   <nav class="nav solid" id="nav">
@@ -60,6 +60,10 @@
               <input id="name" class="input" maxlength="120" required placeholder="e.g. Hand-painted Jordanian vase">
             </div>
             <div class="field">
+              <label for="cat">Category <em>required</em></label>
+              <select id="cat" class="input" required></select>
+            </div>
+            <div class="field">
               <label for="desc">Description <em>required</em></label>
               <textarea id="desc" class="textarea" maxlength="3000" required placeholder="Condition, size, colour, how to contact you…"></textarea>
             </div>
@@ -84,7 +88,7 @@
           <div class="pv-label">Live preview</div>
           <article class="art static">
             <div class="arch"><img id="pvImg" alt="" style="display:none"><div id="pvPh" style="position:absolute;inset:0;display:grid;place-items:center;font-size:44px;opacity:.4">🏛️</div></div>
-            <div class="no">Nº I</div>
+            <div class="no" id="pvCat">Nº I · Fashion</div>
             <h3 id="pvName">Treasure name</h3>
             <p id="pvDesc">Your description will appear here.</p>
             <div class="plaque" id="pvPrice">0 JOD</div>
@@ -100,9 +104,9 @@
     </section>
   </main>
 
-  <script src="assets/config.js?v=1793900733"></script>
-  <script src="assets/api.js?v=1793900733"></script>
-  <script src="assets/effects.js?v=1793900733"></script>
-  <script src="assets/a-586f1898.js?v=1793900733"></script>
+  <script src="assets/config.js?v=1793939382"></script>
+  <script src="assets/api.js?v=1793939382"></script>
+  <script src="assets/effects.js?v=1793939382"></script>
+  <script src="assets/a-586f1898.js?v=1793939382"></script>
 </body>
 </html>
