@@ -4,6 +4,8 @@
   const KEY = "souq_admin_pw";
   let password = null;
   let imageData = null;
+  let extraImages = [];
+  const MAX_EXTRA = 6;
 
   function store(v) { try { v ? sessionStorage.setItem(KEY, v) : sessionStorage.removeItem(KEY); } catch (_) {} }
   function stored() { try { return sessionStorage.getItem(KEY); } catch (_) { return null; } }
@@ -50,7 +52,8 @@
   if (saved) SouqAPI.checkPassword(saved).then(ok => ok === true ? unlock(saved) : store(null)).catch(() => {});
 
   // ---------- Image handling ----------
-  function resize(file) {
+  function resize(file, limit) {
+    limit = limit || 900000;
     return new Promise((resolve, reject) => {
       if (!file || !file.type.startsWith("image/")) return reject(new Error("Please choose an image file"));
       const reader = new FileReader();
@@ -67,7 +70,7 @@
           ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, c.width, c.height);
           ctx.drawImage(img, 0, 0, c.width, c.height);
           let q = .85, out = c.toDataURL("image/jpeg", q);
-          while (out.length > 900000 && q > .4) { q -= .1; out = c.toDataURL("image/jpeg", q); }
+          while (out.length > limit && q > .3) { q -= .1; out = c.toDataURL("image/jpeg", q); }
           resolve(out);
         };
         img.src = reader.result;
@@ -104,10 +107,28 @@
   }
   ["name", "desc", "price", "addr", "cat"].forEach(id => { $("#" + id).addEventListener("input", updatePreview); $("#" + id).addEventListener("change", updatePreview); });
 
+  // ---------- More photos ----------
+  function renderExtras() {
+    const box = $("#extras");
+    box.innerHTML = extraImages.map((src, i) => `<div class="x-item"><img src="${src}" alt=""><button type="button" data-i="${i}" aria-label="Remove photo">✕</button></div>`).join("") +
+      (extraImages.length < MAX_EXTRA ? `<label class="x-add"><input type="file" id="extraFiles" accept="image/*" multiple aria-label="Add more photos"><span><b>+</b>Add photos</span></label>` : "");
+    const inp = $("#extraFiles");
+    if (inp) inp.addEventListener("change", async e => {
+      const files = [...e.target.files].slice(0, MAX_EXTRA - extraImages.length);
+      for (const f of files) { try { extraImages.push(await resize(f, 450000)); } catch (err) { toast(err.message, "err"); } }
+      renderExtras();
+    });
+  }
+  $("#extras").addEventListener("click", e => {
+    const b = e.target.closest("button[data-i]"); if (!b) return;
+    extraImages.splice(+b.dataset.i, 1); renderExtras();
+  });
+  renderExtras();
+
   // ---------- Publish ----------
   $("#productForm").addEventListener("submit", async e => {
     e.preventDefault();
-    if (!imageData) return toast("Please add a picture of the product", "err");
+    if (!imageData) return toast("Please add the display photo first", "err");
     const price = parseFloat($("#price").value);
     if (!(price >= 0)) return toast("Please enter a valid price", "err");
     const btn = $("#publish");
@@ -119,11 +140,12 @@
         price,
         address: $("#addr").value.trim(),
         category: $("#cat").value,
-        image: imageData
+        image: imageData,
+        images: extraImages
       });
       confetti();
       toast("Product published! It's now live on the store 🎉", "ok");
-      e.target.reset(); imageData = null;
+      e.target.reset(); imageData = null; extraImages = []; renderExtras();
       drop.querySelectorAll("img.preview, .change").forEach(n => n.remove());
       $("#dropHint").style.visibility = "";
       $("#pvImg").style.display = "none"; $("#pvPh").style.display = "grid";

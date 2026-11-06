@@ -28,10 +28,22 @@
     categories: ["Fashion", "Jewellery & Accessories", "Electronics", "Home & Décor", "Furniture", "Beauty", "Books", "Sports", "Kids & Toys", "Other"],
     async listProducts() {
       const res = await fetch(
-        C.url + "/rest/v1/amman_products?select=*&order=created_at.desc",
+        C.url + "/rest/v1/amman_products?select=id,name,description,price,address,image,category,created_at&order=created_at.desc",
         { headers }
       );
       return handle(res);
+    },
+    async getImages(id) {
+      const res = await fetch(C.url + "/rest/v1/amman_products?select=images&id=eq." + encodeURIComponent(id), { headers });
+      const rows = await handle(res);
+      return (rows && rows[0] && rows[0].images) || [];
+    },
+    whatsappLink(text) {
+      const n = String(C.whatsapp || "").replace(/\D/g, "");
+      return n ? "https://wa.me/" + n + "?text=" + encodeURIComponent(text) : "";
+    },
+    emailLink(subject, body) {
+      return C.email ? "mailto:" + C.email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body) : "";
     },
     checkPassword(password) {
       return rpc("amman_check_password", { p_password: password });
@@ -44,7 +56,8 @@
         p_price: p.price,
         p_address: p.address || null,
         p_image: p.image,
-        p_category: p.category || "Other"
+        p_category: p.category || "Other",
+        p_images: p.images || []
       });
     },
     deleteProduct(password, id) {
